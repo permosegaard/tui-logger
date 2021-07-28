@@ -923,7 +923,7 @@ impl<'b> Widget for TuiLoggerWidget<'b> {
                     output.push(':');
                     output.push_str(&format!("{}", evt.line));
                 }*/
-                output.push(': ');
+                output.push_str(': ');
                 let mut sublines: Vec<&str> = evt.msg.lines().rev().collect();
                 output.push_str(sublines.pop().unwrap());
                 for subline in sublines {
