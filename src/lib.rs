@@ -304,12 +304,10 @@ impl TuiLogger {
             if let Some(ref mut file) = tli.dump {
                 if let Err(_e) = writeln!(
                     file,
-                    "{}:{}:{}:{}:{}:{}",
+                    "{}:{}:{}:{}",
                     &log_entry.timestamp.format("[%Y:%m:%d %H:%M:%S]"),
                     log_entry.level,
                     log_entry.target,
-                    &log_entry.file,
-                    log_entry.line,
                     &log_entry.msg
                 ) {
                     // TODO: What to do in case of write error ?
@@ -919,12 +917,12 @@ impl<'b> Widget for TuiLoggerWidget<'b> {
                 output.push_str(txt);
                 output.push(':');
                 output.push_str(&evt.target);
-                if with_loc {
+                /*if with_loc {
                     output.push(':');
                     output.push_str(&evt.file);
                     output.push(':');
                     output.push_str(&format!("{}", evt.line));
-                }
+                }*/
                 output.push(':');
                 let mut sublines: Vec<&str> = evt.msg.lines().rev().collect();
                 output.push_str(sublines.pop().unwrap());
