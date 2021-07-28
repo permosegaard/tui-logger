@@ -905,7 +905,6 @@ impl<'b> Widget for TuiLoggerWidget<'b> {
                     state.opt_timestamp_next_page = circular.take().first().cloned();
                 }
                 let mut output = String::new();
-                output.push('[');
                 output.push_str(&format!("{}", evt.timestamp.format("%H:%M:%S")));
                 output.push(' ');
                 let (col_style, txt, with_loc) = match evt.level {
@@ -924,7 +923,7 @@ impl<'b> Widget for TuiLoggerWidget<'b> {
                     output.push(':');
                     output.push_str(&format!("{}", evt.line));
                 }*/
-                output.push_str(" ] ");
+                output.push(': ');
                 let mut sublines: Vec<&str> = evt.msg.lines().rev().collect();
                 output.push_str(sublines.pop().unwrap());
                 for subline in sublines {
