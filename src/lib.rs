@@ -29,7 +29,7 @@
 //! - [x] Title of target and log pane can be configured
 //! - [X] `slog` support, providing a Drain to integrate into your `slog` infrastructure
 //! - [ ] Allow configuration of target dependent loglevel specifically for file logging
-//! - [ ] Avoid duplicating of target, module and filename in every log record
+//! - [Avoid duplicating of target, module and filename in every log record
 //! - [ ] Simultaneous modification of all targets' display/hot logging loglevel by key command
 //!
 //! ## Smart Widget
@@ -924,7 +924,7 @@ impl<'b> Widget for TuiLoggerWidget<'b> {
                     output.push(':');
                     output.push_str(&format!("{}", evt.line));
                 }*/
-                output.push(' ] ');
+                output.push_str(" ] ");
                 let mut sublines: Vec<&str> = evt.msg.lines().rev().collect();
                 output.push_str(sublines.pop().unwrap());
                 for subline in sublines {
