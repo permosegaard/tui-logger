@@ -905,17 +905,18 @@ impl<'b> Widget for TuiLoggerWidget<'b> {
                     state.opt_timestamp_next_page = circular.take().first().cloned();
                 }
                 let mut output = String::new();
+                output.push('[');
                 output.push_str(&format!("{}", evt.timestamp.format("%H:%M:%S")));
-                output.push(':');
+                output.push(' ');
                 let (col_style, txt, with_loc) = match evt.level {
                     log::Level::Error => (self.style_error, "ERROR", true),
-                    log::Level::Warn => (self.style_warn, "WARN ", true),
-                    log::Level::Info => (self.style_info, "INFO ", false),
+                    log::Level::Warn => (self.style_warn, " WARN", true),
+                    log::Level::Info => (self.style_info, " INFO", false),
                     log::Level::Debug => (self.style_debug, "DEBUG", true),
                     log::Level::Trace => (self.style_trace, "TRACE", true),
                 };
                 output.push_str(txt);
-                output.push(':');
+                output.push(' ');
                 output.push_str(&evt.target);
                 /*if with_loc {
                     output.push(':');
@@ -923,7 +924,7 @@ impl<'b> Widget for TuiLoggerWidget<'b> {
                     output.push(':');
                     output.push_str(&format!("{}", evt.line));
                 }*/
-                output.push(':');
+                output.push(' ] ');
                 let mut sublines: Vec<&str> = evt.msg.lines().rev().collect();
                 output.push_str(sublines.pop().unwrap());
                 for subline in sublines {
